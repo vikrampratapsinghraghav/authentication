@@ -1,97 +1,230 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Authentication App
 
-# Getting Started
+A React Native app with Login and Signup functionality using React Context API to manage authentication state.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Authentication Context**: Global state management using React Context API
+- **Login Screen**: Email/password authentication with validation
+- **Signup Screen**: User registration with name, email, and password
+- **Home Screen**: Displays user information and logout functionality
+- **Persistent Authentication**: Uses AsyncStorage to maintain login state
+- **Navigation**: React Navigation for seamless screen transitions
+- **Modern UI**: Clean, intuitive design with proper error handling
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Screens
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### 1. Login Screen
+- Email and password input fields
+- Form validation for email format and password length
+- Error messages for invalid credentials
+- Navigation to Signup screen
 
-```sh
-# Using npm
-npm start
+### 2. Signup Screen
+- Name, email, and password input fields
+- Validation for all required fields
+- Email format validation
+- Password length validation (minimum 6 characters)
+- Navigation back to Login screen
 
-# OR using Yarn
-yarn start
+### 3. Home Screen
+- Displays logged-in user's information (name, email, ID)
+- Logout functionality with confirmation dialog
+- Clean card-based layout
+
+## Technical Implementation
+
+### Authentication Context
+- `AuthProvider`: Wraps the app and provides authentication state
+- `useAuth`: Custom hook to access authentication functions
+- Functions: `login`, `signup`, `logout`
+- State: `user`, `isLoading`
+
+### Data Persistence
+- Uses AsyncStorage to persist user authentication state
+- Automatically loads user data on app startup
+- Maintains login state across app restarts
+
+### Navigation
+- React Navigation with Native Stack Navigator
+- Conditional navigation based on authentication state
+- Automatic redirection to appropriate screens
+
+### Form Validation
+- Email format validation using regex
+- Password length validation
+- Required field validation
+- User-friendly error messages
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. For iOS:
+   ```bash
+   cd ios && pod install && cd ..
+   npm run ios
+   ```
+
+3. For Android:
+   ```bash
+   npm run android
+   ```
+
+## Dependencies
+
+- React Native
+- React Navigation
+- AsyncStorage
+- React Native Safe Area Context
+- React Native Screens
+
+## Project Structure
+
+```
+src/
+├── contexts/
+│   └── AuthContext.tsx    # Authentication state management
+└── screens/
+    ├── LoginScreen.tsx    # Login form
+    ├── SignupScreen.tsx   # Registration form
+    ├── HomeScreen.tsx     # User dashboard
+    └── LoadingScreen.tsx  # Loading state
 ```
 
-## Step 2: Build and run your app
+## Usage
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. **First Time Users**: Navigate to Signup screen to create an account
+2. **Existing Users**: Use Login screen with email and password
+3. **Home Screen**: View user information and logout when done
+4. **Persistence**: App remembers login state between sessions
 
-### Android
+## Enhanced Field Validation
 
-```sh
-# Using npm
-npm run android
+The app now includes comprehensive regex-based validation for all form fields:
 
-# OR using Yarn
-yarn android
-```
+### Email Validation
+- **RFC 5322 compliant** email regex pattern
+- Validates proper email format with local part, @ symbol, and domain
+- Checks for maximum length (254 characters)
+- Handles international domain names
+- Examples of valid emails:
+  - `user@example.com`
+  - `test.email@domain.co.uk`
+  - `user+tag@example.org`
 
-### iOS
+### Name Validation
+- Allows letters, spaces, hyphens, and apostrophes
+- Minimum 2 characters, maximum 50 characters
+- Supports international names with accents
+- Examples of valid names:
+  - `John Doe`
+  - `O'Connor`
+  - `Mary-Jane Smith`
+  - `José María`
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### Password Validation
+- **Basic validation**: Minimum 6 characters
+- **Strong validation**: Minimum 8 characters with:
+  - At least 1 uppercase letter
+  - At least 1 lowercase letter
+  - At least 1 number
+  - At least 1 special character (@$!%*?&)
+- Real-time password strength indicator
+- Visual feedback with color-coded strength meter
+- Maximum length limit (128 characters)
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### Validation Features
+- **Real-time validation**: Errors clear as user types
+- **Visual feedback**: Red borders for invalid fields
+- **Comprehensive error messages**: Clear, actionable feedback
+- **Password strength meter**: Visual indicator of password strength
+- **Requirements display**: Shows missing password requirements
+- **Edge case handling**: Empty fields, length limits, special characters
 
-```sh
-bundle install
-```
+### Validation Utility Functions
+Located in `src/utils/validation.ts`:
+- `validateEmail()`: Email format and length validation
+- `validateName()`: Name format and length validation
+- `validatePassword()`: Password strength validation
+- `validatePasswordStrength()`: Detailed password analysis
+- `validateForm()`: General form validation helper
 
-Then, and every time you update your native dependencies, run:
+### Security Considerations
+- Passwords are validated for strength but not stored in plain text
+- Email validation prevents common injection attempts
+- Name validation prevents XSS through special characters
+- All inputs are trimmed and sanitized
+- Length limits prevent buffer overflow attacks
 
-```sh
-bundle exec pod install
-```
+## Modern UI Design
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+The app now features a modern, clean design inspired by contemporary mobile app aesthetics:
 
-```sh
-# Using npm
-npm run ios
+### Design System
+- **Color Palette**: Orange gradient theme (#FF6B35 to #FFD54F)
+- **Typography**: Clean sans-serif fonts with proper hierarchy
+- **Spacing**: Consistent spacing system (4px, 8px, 16px, 24px, 32px, 48px, 64px)
+- **Shadows**: Subtle elevation with proper shadow system
+- **Border Radius**: Consistent rounded corners (4px, 8px, 12px, 16px, 24px)
 
-# OR using Yarn
-yarn ios
-```
+### Visual Components
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+**Gradient Buttons:**
+- Orange to yellow gradient background
+- Subtle shadow effects
+- Arrow icons for better UX
+- Loading states with spinners
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+**Input Fields:**
+- Clean white backgrounds with subtle borders
+- Icons for visual context (mail, lock, person)
+- Focus states with orange border highlights
+- Error states with red borders and messages
+- Proper label styling with uppercase text
 
-## Step 3: Modify your app
+**Decorative Elements:**
+- Gradient circular shapes in top-right corners
+- Subtle opacity for non-intrusive design
+- Consistent positioning across screens
 
-Now that you have successfully run the app, let's make changes!
+**Cards and Containers:**
+- Clean white cards with subtle shadows
+- Proper padding and margins
+- Rounded corners for modern look
+- Icon headers for information cards
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### Screen-Specific Design
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+**Login Screen:**
+- Large title with subtitle
+- "FORGOT" link positioned next to password field
+- Gradient login button with arrow icon
+- Footer link for navigation to signup
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+**Signup Screen:**
+- Back arrow button in top-left
+- Password strength indicator with color-coded progress bar
+- Confirm password field for better UX
+- Gradient signup button with arrow icon
 
-## Congratulations! :tada:
+**Home Screen:**
+- Welcome message with user information cards
+- Icon-based information display
+- Gradient logout button with warning colors
+- Clean card layout with proper spacing
 
-You've successfully run and modified your React Native App. :partying_face:
+### Responsive Design
+- Keyboard-aware layouts
+- Proper safe area handling
+- Scrollable content where needed
+- Consistent spacing across different screen sizes
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### Accessibility
+- Proper contrast ratios
+- Touch-friendly button sizes (minimum 48px)
+- Clear visual hierarchy
+- Readable typography scales
