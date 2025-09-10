@@ -162,6 +162,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
               autoCapitalize="none"
               autoComplete="new-password"
               icon="lock-closed-outline"
+              secureToggle
               error={errors.password}
             />
 
@@ -187,6 +188,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
             <InputField
               label="CONFIRM PASSWORD"
               placeholder="Confirm your password"
+              secureToggle
               value={confirmPassword}
               onChangeText={(text) => {
                 setConfirmPassword(text);

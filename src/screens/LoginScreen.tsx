@@ -110,6 +110,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               autoCapitalize="none"
               autoComplete="password"
               icon="lock-closed-outline"
+              secureToggle
               error={errors.password}
             />
            

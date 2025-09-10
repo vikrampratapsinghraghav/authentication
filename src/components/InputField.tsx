@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TextInputProps, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors, typography, spacing, borderRadius } from '../styles/theme';
 
@@ -8,6 +8,7 @@ interface InputFieldProps extends TextInputProps {
   error?: string;
   icon?: string;
   containerStyle?: any;
+  secureToggle?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -16,9 +17,13 @@ const InputField: React.FC<InputFieldProps> = ({
   icon,
   containerStyle,
   style,
-  ...props
+  secureTextEntry,
+  secureToggle,
+  ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const computedSecure = secureTextEntry ? !(secureToggle && isPasswordVisible) : false;
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -41,8 +46,23 @@ const InputField: React.FC<InputFieldProps> = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholderTextColor={colors.textLight}
-          {...props}
+          {...rest}
+          secureTextEntry={computedSecure}
         />
+        {secureTextEntry && secureToggle && (
+          <TouchableOpacity
+            onPress={() => setIsPasswordVisible(prev => !prev)}
+            accessibilityRole="button"
+            accessibilityLabel="Toggle password visibility"
+            style={styles.rightIcon}
+          >
+            <Icon
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={20}
+              color={isFocused ? colors.primary : colors.textSecondary}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
@@ -59,6 +79,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
+    paddingRight: spacing.xl,
     alignItems: 'center',
     backgroundColor: colors.background,
     borderWidth: 1,
@@ -77,6 +98,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: spacing.sm,
+  },
+  rightIcon: {
+    position: 'absolute',
+    right: spacing.md,
   },
   input: {
     flex: 1,

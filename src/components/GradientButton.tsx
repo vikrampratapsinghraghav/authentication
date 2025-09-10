@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
- 
     minHeight: 48,
     borderRadius: borderRadius.md,
   },
