@@ -23,11 +23,11 @@ A polished, production-ready React Native authentication starter featuring a mod
 
 ### App Screenshots
 
-![Login](assets/screens/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-09-10%20at%2014.26.28.png)
+![Login](./assets/screens/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-09-10%20at%2014.26.28.png)
 
-![Signup](assets/screens/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-09-10%20at%2014.26.35.png)
+![Signup](./assets/screens/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-09-10%20at%2014.26.35.png)
 
-![Home](assets/screens/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-09-10%20at%2014.26.39.png)
+![Home](./assets/screens/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-09-10%20at%2014.26.39.png)
 
 - Login: Email + Password, forgot link, validation errors
 - Signup: Name + Email + Password + Confirm, strength meter
