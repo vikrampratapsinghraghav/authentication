@@ -84,9 +84,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: borderRadius.md,
-    paddingHorizontal: spacing.md,
-    minHeight: 48,
+    borderRadius: borderRadius.full,
+    paddingHorizontal: spacing.lg,
+    minHeight: 56,
+    overflow: 'hidden',
   },
   inputFocused: {
     borderColor: colors.primary,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   icon: {
-    marginRight: spacing.sm,
+    marginRight: spacing.md,
   },
   rightIcon: {
     position: 'absolute',
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 17,
     color: colors.text,
     paddingVertical: spacing.sm,
   },

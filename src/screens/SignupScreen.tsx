@@ -255,6 +255,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.h1,
+    color: colors.primary,
   },
   form: {
     flex: 1,

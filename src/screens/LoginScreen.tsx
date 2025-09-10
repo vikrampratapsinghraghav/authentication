@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 import { validateEmail, validatePassword } from '../utils/validation';
@@ -14,6 +15,7 @@ import InputField from '../components/InputField';
 import GradientButton from '../components/GradientButton';
 import DecorativeShape from '../components/DecorativeShape';
 import { colors, typography, spacing } from '../styles/theme';
+// import LoginContainer from '../../assets/illustrations/LoginContainer2.jpg';
 
 interface LoginScreenProps {
   navigation: any;
@@ -73,6 +75,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <View style={styles.content}>
+        <Image source={require('../../assets/illustrations/LoginContainer.jpg')} style={styles.topIllustration} resizeMode="contain" />
         <DecorativeShape />
         
         <View style={styles.header}>
@@ -147,12 +150,21 @@ const styles = StyleSheet.create({
     paddingTop: spacing.xxxl,
     paddingBottom: spacing.xl,
   },
-  header: {
+  topIllustration: {
+    
+    width: '100%',
+    height: 200,
+    aspectRatio: 1.6,
+    marginTop: 24,
+    marginBottom: 12,
+  },
+    header: {
     marginBottom: spacing.xxxl,
     marginTop: spacing.xxl,
   },
   title: {
     ...typography.h1,
+    color: colors.primary,
     marginBottom: spacing.sm,
   },
   subtitle: {

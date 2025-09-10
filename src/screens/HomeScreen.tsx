@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.h1,
+    color: colors.primary,
     marginBottom: spacing.sm,
   },
   subtitle: {
