@@ -20,6 +20,15 @@ A polished, production-ready React Native authentication starter featuring a mod
 - TypeScript with strict settings
 
 ## 📸 Screens
+
+### App Screenshots
+
+![Login](assets/screens/login.png)
+
+![Signup](assets/screens/signup.png)
+
+![Home](assets/screens/home.png)
+
 - Login: Email + Password, forgot link, validation errors
 - Signup: Name + Email + Password + Confirm, strength meter
 - Home: Shows logged-in user and logout
